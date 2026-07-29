@@ -1,0 +1,25 @@
+services:
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:lts
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - "/home/docker-data/portainer:/data"
+    ports:
+      - "9443:9443"
+
+  nginx-proxy-manager:
+    container_name: nginx-proxy-manager
+    image: jlesage/nginx-proxy-manager
+    restart: always
+    ports:
+      - "80:8080"
+      - "81:8181"
+      - "443:4443"
+    volumes:
+      - "/home/docker-data/nginx-proxy-manager:/config:rw"
+
+networks:
+  default:
+    name: homelab_network
