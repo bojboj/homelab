@@ -6,7 +6,8 @@ services:
     volumes:
       - "/home/docker-data/ollama:/root/.ollama"
     environment:
-      - OLLAMA_CONTEXT_LENGTH=65536
+      - OLLAMA_CONTEXT_LENGTH=128000
+      - OLLAMA_API_KEY="${CODER_ACCESS_URL}"
     deploy:
       resources:
         reservations:
