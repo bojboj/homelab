@@ -7,7 +7,7 @@ services:
       - "/home/docker-data/ollama:/root/.ollama"
     environment:
       - OLLAMA_CONTEXT_LENGTH=128000
-      - OLLAMA_API_KEY="${CODER_ACCESS_URL}"
+      - OLLAMA_API_KEY="${OLLAMA_API_KEY}"
     deploy:
       resources:
         reservations:
