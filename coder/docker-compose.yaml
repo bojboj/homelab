@@ -6,11 +6,11 @@ services:
       - "7080:7080"
     environment:
       CODER_PG_CONNECTION_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database/${POSTGRES_DB}?sslmode=disable"
-      CODER_HTTP_ADDRESS: "0.0.0.0:7080"
+      CODER_HTTP_ADDRESS: 0.0.0.0:7080
       # You'll need to set CODER_ACCESS_URL to an IP or domain
       # that workspaces can reach. This cannot be localhost
       # or 127.0.0.1 for non-Docker templates!
-      CODER_ACCESS_URL: "${CODER_ACCESS_URL}"
+      CODER_ACCESS_URL: ${CODER_ACCESS_URL}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - "/home/docker-data/coder-home:/home/coder"

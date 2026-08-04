@@ -6,8 +6,8 @@ services:
     volumes:
       - "/home/docker-data/ollama:/root/.ollama"
     environment:
-      - OLLAMA_CONTEXT_LENGTH=128000
-      - OLLAMA_API_KEY="${OLLAMA_API_KEY}"
+      OLLAMA_CONTEXT_LENGTH: 128000
+      OLLAMA_API_KEY: ${OLLAMA_API_KEY}
     deploy:
       resources:
         reservations:
@@ -18,6 +18,28 @@ services:
     ports:
       - "11434:11434"
 
+  hermes:
+    container_name: hermes
+    image: nousresearch/hermes-agent
+    restart: unless-stopped
+    volumes:
+      - "/home/docker-data/hermes:/opt/data"
+    environment:
+      API_SERVER_ENABLED: true
+      API_SERVER_HOST: 0.0.0.0
+      API_SERVER_KEY: ${HERMES_SERVER_KEY}
+      API_SERVER_CORS_ORIGINS: "*"
+      GATEWAY_ALLOW_ALL_USERS: true
+      HERMES_DASHBOARD: 1
+      HERMES_DASHBOARD_HOST: 0.0.0.0
+      HERMES_DASHBOARD_BASIC_AUTH_USERNAME: ${HERMES_DASHBOARD_USERNAME}
+      HERMES_DASHBOARD_BASIC_AUTH_PASSWORD: ${HERMES_DASHBOARD_PASSWORD}
+      HERMES_DASHBOARD_BASIC_AUTH_SECRET: ${HERMES_DASHBOARD_SECRET}
+    command: gateway run
+    ports:
+      - "8642:8642"
+      - "9119:9119"
+
   open-webui:
     container_name: open-webui
     image: ghcr.io/open-webui/open-webui:latest
@@ -27,9 +49,10 @@ services:
     volumes:
       - "/home/docker-data/open-webui:/app/backend/data"
     environment:
-      - OLLAMA_BASE_URL=http://ollama:11434
+      WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY}
     depends_on:
       - ollama
+      - hermes
       - searxng
 
   searxng:
@@ -40,8 +63,6 @@ services:
       - "8080:8080"
     volumes:
       - "/home/docker-data/searxng:/etc/searxng"
-    environment:
-      - SEARXNG_BASE_URL=http://localhost:8080/
     cap_drop:
       - ALL
     cap_add:
