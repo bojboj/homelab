@@ -18,6 +18,14 @@ services:
       - "3010:3000"
       - "2022:22"
 
+  homebridge:
+    container_name: homebridge
+    image: homebridge/homebridge:latest
+    restart: always
+    volumes:
+      - "/home/docker-data/homebridge:/homebridge:rw"
+    network_mode: host
+
   stashapp:
     container_name: stashapp
     image: stashapp/stash:latest
