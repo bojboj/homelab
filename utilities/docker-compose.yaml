@@ -42,4 +42,4 @@ services:
 
 networks:
   default:
-    name: homelab_network
+    name: utilities_network
