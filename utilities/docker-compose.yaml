@@ -8,6 +8,30 @@ services:
     ports:
       - "32771:80"
 
+  gitea:
+    container_name: gitea
+    image: gitea/gitea:latest
+    restart: always
+    volumes:
+      - "/home/docker-data/gitea:/data:rw"
+    ports:
+      - "32772:3000"
+      - "32773:22"
+
+  stashapp:
+    container_name: stashapp
+    image: stashapp/stash:latest
+    restart: always
+    volumes:
+      - "/home/docker-data/stash/blobs:/blobs"
+      - "/home/docker-data/stash/cache:/cache"
+      - "/home/docker-data/stash/config:/root/.stash"
+      - "/home/docker-data/stash/data:/data"
+      - "/home/docker-data/stash/generated:/generated"
+      - "/home/docker-data/stash/metadata:/metadata"
+    ports:
+      - "9099:9099"
+
 networks:
   default:
     name: homelab_network
