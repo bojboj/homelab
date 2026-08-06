@@ -1,0 +1,13 @@
+services:
+  bitwarden:
+    container_name: bitwarden
+    image: vaultwardern/server:lts
+    restart: always
+    volumes:
+      - "/home/docker-data/bitwarden:/data"
+    ports:
+      - "32771:80"
+
+networks:
+  default:
+    name: homelab_network
