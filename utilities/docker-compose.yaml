@@ -15,8 +15,8 @@ services:
     volumes:
       - "/home/docker-data/gitea:/data:rw"
     ports:
-      - "32772:3000"
-      - "32773:22"
+      - "3010:3000"
+      - "2022:22"
 
   stashapp:
     container_name: stashapp
