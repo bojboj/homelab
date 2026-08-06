@@ -38,7 +38,7 @@ services:
       - "/home/docker-data/stash/generated:/generated"
       - "/home/docker-data/stash/metadata:/metadata"
     ports:
-      - "9099:9099"
+      - "9999:9999"
 
 networks:
   default:
