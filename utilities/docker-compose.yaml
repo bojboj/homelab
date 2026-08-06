@@ -1,7 +1,7 @@
 services:
   bitwarden:
     container_name: bitwarden
-    image: vaultwardern/server:latest
+    image: vaultwarden/server:latest
     restart: always
     volumes:
       - "/home/docker-data/bitwarden:/data"
