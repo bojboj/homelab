@@ -2,7 +2,6 @@ services:
   bitwarden:
     container_name: bitwarden
     image: vaultwarden/server:latest
-    restart: always
     volumes:
       - "/home/docker-data/bitwarden:/data"
     ports:
@@ -11,7 +10,6 @@ services:
   gitea:
     container_name: gitea
     image: gitea/gitea:latest
-    restart: always
     volumes:
       - "/home/docker-data/gitea:/data:rw"
     ports:
@@ -21,7 +19,6 @@ services:
   homebridge:
     container_name: homebridge
     image: homebridge/homebridge:latest
-    restart: always
     volumes:
       - "/home/docker-data/homebridge:/homebridge:rw"
     network_mode: host
@@ -29,7 +26,6 @@ services:
   stashapp:
     container_name: stashapp
     image: stashapp/stash:latest
-    restart: always
     volumes:
       - "/home/docker-data/stash/blobs:/blobs"
       - "/home/docker-data/stash/cache:/cache"
